@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigModule } from '@nestjs/config';
 import { AuthenticationMiddleware } from './middleware/authentication.middleware';
+import { Reflector } from '@nestjs/core';
 
 @Module({
   imports: [ClientsModule.register([
@@ -24,7 +25,7 @@ import { AuthenticationMiddleware } from './middleware/authentication.middleware
   ]),
   ConfigModule.forRoot()],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, Reflector],
 })
 export class AppModule implements NestModule {
   async configure(consumer: MiddlewareConsumer) {

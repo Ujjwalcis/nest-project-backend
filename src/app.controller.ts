@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { GetUserDto } from './dto/get-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
+import { Roles } from './decorators/roles.decorator';
 import { Role } from './entity/role.enum';
 
 @Controller("user")
@@ -21,6 +22,7 @@ export class AppController {
   }
 
   @Get()
+  @Roles([Role.ADMIN])
   async getUserByFilters(@Body() getUserDto: GetUserDto) {
     return await this.appService.getUserByFilters(getUserDto);
   }
